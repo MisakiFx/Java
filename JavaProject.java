@@ -1,4 +1,3 @@
-//鎵撳嵃瑙掕壊淇℃伅
 public class JavaProject{
     public static void main(String[] args) {
         System.out.println("索利达尔·群星之怒");//println()打印并换行
@@ -16,6 +15,10 @@ public class JavaProject{
         System.out.println("核心频率：" + hz + "MHz");
         System.out.println("长宽高：" + length + "\\" + width + "\\" + height);
         //未初始化的值不允许打印输出，比C人性化太
+        System.out.printf("宽度为：%.2f\n" ,length);
+        //JDK5以后支持医生这种写法
+        String str = String.format("宽度是：%d\n", 20);
+        System.out.println(str);
         
     }
 }
