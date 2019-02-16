@@ -1,13 +1,48 @@
+import java.util.Scanner;
+
 public class ArrayDemo
 {
     public static void main(String[] args) 
     {
-        //æ•°ç»„çš„å®šä¹‰æ–¹æ³•
-        //int[] nums = null;//å£°æ˜äº†ä¸€ä¸ªæ•´å½¢æ•°ç»„nums
+        //´´½¨Ò»¸öÊı×é
+        //int[] nums = null;
+        //Ã»ÓĞ¸ønums·ÖÅä¿Õ¼ä
         //nums[0] = 9;
-        //è¿™æ ·å†™ä¼šå‡ºç°å¼‚å¸¸ï¼Œå°±åƒåœ¨Cè¯­è¨€ä¸­æ²¡æœ‰ç»™å†…å­˜ç©ºé—´
-        int[] nums = new int[5];//åœ¨å †å†…å­˜ä¸­åˆ†é…äº†äº”ä¸ªæ•´å½¢ç©ºé—´
-        //æ•°ç»„åå°±æ˜¯è¿™ä¸€å—ç©ºé—´çš„é¦–åœ°å€
-
+        //ºÍCÓïÑÔÒ»ÑùÊı×éÃû¾ÍÊÇÔªËØµÄÊ×µØÖ·
+        int[] nums = new int[5];//¶¨ÒåÁËÒ»¸önumsÊı×é²¢ÇÒ¸³ÓèÁË5¸öÕûĞÎ¿Õ¼ä
+        //Êı×éµÄ³õÊ¼»¯
+        //Êı×é³õÊ¼»¯²»ÄÜ¸øÖ¸¶¨¿Õ¼ä
+        int years[] = {2012,2013,2014,2015,2016};
+        int[] months = {1, 2, 3, 4, 5};
+        //¶¯Ì¬¸øÊı×é¸³Öµ
+        Scanner input = new Scanner(System.in);
+        double[] scores = new double[5];
+        double sum = 0, avg;//×Ü³É¼¨ºÍÆ½¾ù³É¼¨
+        for(int i = 0 ; i < scores.length; i++)//javaÇóÊı×é³¤¶ÈÌ«·½±ãÁË
+        {
+            System.out.print("ÇëÊäÈëµÚ" + (i + 1) + "Î»Í¬Ñ§µÄ³É¼¨£º");
+            //½«ÓÃ»§ÊäÈëµÄdoubleÀàĞÍÊı×é£¬¸³Öµ¸øÊı×éÖĞµÄµÚi¸öÔªËØ
+            scores[i] = input.nextDouble();
+        }
+        //´òÓ¡Â¼Èë
+        for(int i = 0 ; i < scores.length; i++)
+        {
+            sum += scores[i];
+        }
+        System.out.printf("%dÎ»Í¬Ñ§µÄÆ½¾ù³É¼¨Îª£º%.2f\n", scores.length, sum / scores.length);
+        //´òÓ¡ì³²¨ÄÇÆõÊıÁĞ
+        int[] fibs = new int[15];
+        fibs[0] = 0;
+        fibs[1] = 1;
+        for(int i = 2; i < fibs.length; i++)
+        {
+            fibs[i] = fibs[i - 1] + fibs[i - 2];
+        }
+        System.out.println("´òÓ¡½á¹û£º");
+        for (int i = 0; i < fibs.length; i++) 
+        {
+            System.out.print(fibs[i] + ",");    
+        }
+        System.out.println();
     }
 }
