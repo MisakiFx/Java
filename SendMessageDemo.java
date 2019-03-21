@@ -33,4 +33,15 @@ public class SendMessageDemo {
             }
         }
     }
+    /**
+     * 只需要用户提供姓名即可进行默认的喊话
+     */
+    public static void SendMessage(String nickName) {
+        String[]  contains = {
+            "你吃了么？",
+            "保护我方孙尚香！",
+            "万物皆虚，万事皆允"
+        }
+        SendMessage(nickName, "默认频道", contains[(int)(Math.random() * 2);], count, interval);
+    }
 }
