@@ -5,7 +5,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class SendMessageDemo {
     public static void main(String[] args) {
-        SendMessage("Misaki", "世界频道", "我是你的小可爱！！！", 10, 1);
+        //SendMessage("Misaki", "世界频道", "我是你的小可爱！！！", 10, 1);
+        SendMessage("Misaki");
     }
 
     /**
@@ -15,13 +16,13 @@ public class SendMessageDemo {
      * count 喊话的数量 
      * interval 喊话的时间间隔()
      */
-    public static void SendMessage(String name, String channelName, String message, int count, int interval) {
+    public static void SendMessage(String name, String channalName, String message, int count, int interval) {
         // 喊话的总体逻辑，拼接字符串后打印出来
         // 格式化拼接函数
         //if(interval < 5) {
         //    interval = 5;
         //}
-        String value = String.format("【%s】 %s: %s", channelName, name, message);
+        String value = String.format("【%s】 %s: %s", channalName, name, message);
         for (int i = 0; i < count; i++) {
             System.out.println(value);
             try {
@@ -41,7 +42,17 @@ public class SendMessageDemo {
             "你吃了么？",
             "保护我方孙尚香！",
             "万物皆虚，万事皆允"
-        }
-        SendMessage(nickName, "默认频道", contains[(int)(Math.random() * 2);], count, interval);
+        };
+        SendMessage(nickName, "默认频道", contains[(int)(Math.random() * 2)], 10, 1);
+    }
+    /**
+     * 重载的喊话函数
+     * nickName:昵称
+     * channalName:频道名称
+     */
+    public static void SendMessage(String nickName, String channalName)
+    {
+        SendMessage(
+            nickName, channalName, "", 10, 1);
     }
 }
