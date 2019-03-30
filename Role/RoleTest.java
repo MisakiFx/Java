@@ -1,3 +1,4 @@
+package Role;
 public class RoleTest {
     public static void main(String[] args) {
         Role role1 = new Role("Misaki", 10, "ÑÝÔ±");

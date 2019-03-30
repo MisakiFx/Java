@@ -1,3 +1,4 @@
+package DialogDemo;
 /** java的选项面板 */
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
