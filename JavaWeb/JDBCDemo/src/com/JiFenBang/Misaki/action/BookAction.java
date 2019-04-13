@@ -10,8 +10,10 @@ public class BookAction {
 	public static void main(String[] args) throws SQLException {
 		BookDao b = new BookDao();
 		Book bk = new Book();
-		bk.setId(4);
-		bk.setName("ÔÆÔ¼");
-		b.AddBook(bk);
+		List<Book> book = b.query();
+		for(Book b1 : book) {
+			System.out.println(b1.getId() + "\t" + b1.getName());
+		}
+		
 	}
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+       Copyright 2009-2012 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间 -->
+<mapper namespace="Connect">
+
+
+  <resultMap type="bean.Connect" id="ConnectResult">
+    <result column="athletes_id" jdbcType="INTEGER" property="athletesId"/>
+    <result column="college_id" jdbcType="INTEGER" property="collegeId"/>
+    <result column="rank" jdbcType="INTEGER" property="rank"/>
+    <result column="grade" jdbcType="VARCHAR" property="grade"/>
+  </resultMap>
+   <resultMap type="bean.MedalNum" id="MedalNumResult">
+    <result column="college_id" jdbcType="INTEGER" property="collegeId"/>
+    <result column="count(*)" jdbcType="INTEGER" property="num"/>
+  </resultMap>
+  
+ <select id="queryGoldNumList" resultMap="MedalNumResult">
+    select college_id, count(*) from connect where rank = 1 group by college_id order by college_id
+ </select>
+  <select id="querySilverNumList" resultMap="MedalNumResult">
+    select college_id, count(*) from connect where rank = 2 group by college_id order by college_id
+ </select>
+  <select id="queryCopperNumList" resultMap="MedalNumResult">
+    select college_id, count(*) from connect where rank = 3 group by college_id order by college_id
+ </select>
+ <select id="queryConnectList" resultMap="ConnectResult">
+    select athletes_id, match_project_id, college_id, rank, grade from connect order by college_id
+ </select>
+ <!--
+<delete id="deleteOne" parameterType="int">
+ delete from book where id = #{_parameter}
+</delete>
+<delete id="deleteBatch" parameterType="java.util.List">
+ delete from book where id in(
+  <foreach collection="list" item="item" separator=",">
+   #{item}
+  </foreach>
+ )
+</delete>
+-->
+</mapper>

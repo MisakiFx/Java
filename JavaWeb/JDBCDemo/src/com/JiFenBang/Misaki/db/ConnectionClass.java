@@ -7,15 +7,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ConnectionClass {
-	private static String url = "jdbc:mysql://47.112.23.227/test";
+	private static String url = "jdbc:mysql://47.92.196.104/ScoreBoard";
 	private static String user = "root";
-	private static String password = "hyx19990925";
+	private static String password = "web003";
 	private static Connection conn = null;
-	static {
+
+	public static Connection getConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			//Á¬½Óµ½Êý¾Ý¿â
-			conn = DriverManager.getConnection(url, user, password);
+			//ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
+//			conn = DriverManager.getConnection(url, user, password);
+			conn = DriverManager.getConnection(url+"?useUnicode=true&characterEncoding=UTF8", user, password);
+			System.out.println(conn);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -23,25 +26,28 @@ public class ConnectionClass {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	public static Connection getConnection() {
 		return conn;
 	}
-	public static void main(String[] args) throws SQLException, ClassNotFoundException {
-		//¼ÓÔØÇý¶¯
-		
-//		System.out.println(conn);
-//		try {
-//			Thread.sleep(50000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		//Ê¹ÓÃÊý¾Ý¿âÖ¸Áî
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select id, name from book");
-		while(rs.next()) {
-			System.out.println(rs.getInt("id") + "," + rs.getString("name"));
-		}
+
+	public static void main(String[] args) {
+		System.out.println(ConnectionClass.getConnection());
 	}
+	
+	//	public static void main(String[] args) throws SQLException, ClassNotFoundException {
+//		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		
+////		System.out.println(conn);
+////		try {
+////			Thread.sleep(50000);
+////		} catch (InterruptedException e) {
+////			// TODO Auto-generated catch block
+////			e.printStackTrace();
+////		}
+//		//Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½Ö¸ï¿½ï¿½
+//		Statement stmt = conn.createStatement();
+//		ResultSet rs = stmt.executeQuery("select id, name from book");
+//		while(rs.next()) {
+//			System.out.println(rs.getInt("id") + "," + rs.getString("name"));
+//		}
+//	}
 }
