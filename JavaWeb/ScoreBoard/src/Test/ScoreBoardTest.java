@@ -15,8 +15,8 @@ import dao.CollegeDao;
 import dao.ConnectDao;
 import dao.MatchProjectDao;
 import db.DBAccess;
-import service.AthletesService;
-import service.CollegeService;
+import service.AthletesServiceImpl;
+import service.CollegeServiceImpl;
 import viewobject.AthletesViw;
 import viewobject.AthletesViwForMatchProject;
 import viewobject.CollegePoint;
@@ -24,6 +24,7 @@ import viewobject.TeamViw;
 
 public class ScoreBoardTest {
 	public static void main(String[] args) {
+		
 //		ConnectDao connectDao = new ConnectDao();
 //		List<MedalNum> medalNum = connectDao.queryCopperNumList();
 //		for(MedalNum num : medalNum) {
@@ -62,10 +63,10 @@ public class ScoreBoardTest {
 //		for(TeamViw e : teamViw) {
 //			System.out.println(e.getName() + "\t" + e.getSex() + "\t" );
 //		}
-		AthletesService athletesService = new AthletesService();
+		AthletesServiceImpl athletesService = new AthletesServiceImpl();
 		List<AthletesViwForMatchProject> athletesViwForMatchProject = athletesService.queryAthletesListByMatchProject("男子400米");
 		for(AthletesViwForMatchProject e : athletesViwForMatchProject) {
-			System.out.println(e.getId() + "\t" + e.getStuNum() + "\t" + e.getName() + "\t" + e.getSex() + "\t" + e.getCollege() + "\t" + e.getClassName());
+			System.out.println(e);
 		}
 	}
 }

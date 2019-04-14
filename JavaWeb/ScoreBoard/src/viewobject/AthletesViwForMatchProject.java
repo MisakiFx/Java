@@ -49,5 +49,10 @@ public class AthletesViwForMatchProject {
 	public void setCollege(String college) {
 		this.college = college;
 	}
+	@Override
+	public String toString() {
+		return "AthletesViwForMatchProject [id=" + id + ", stuNum=" + stuNum + ", name=" + name + ", sex=" + sex
+				+ ", className=" + className + ", college=" + college + "]";
+	}
 	
 }
