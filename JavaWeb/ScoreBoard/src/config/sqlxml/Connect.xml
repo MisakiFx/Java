@@ -47,6 +47,9 @@
  <select id="queryConnectList" resultMap="ConnectResult">
     select athletes_id, match_project_id, college_id, rank, grade from connect order by college_id
  </select>
+ <insert id="insertConnect" parameterType="bean.Connect">
+    insert into connect(athletes_id, match_project_id,college_id) values(#{athletesId}, #{matchProjectId}, #{collegeId})
+ </insert>
  <!--
 <delete id="deleteOne" parameterType="int">
  delete from book where id = #{_parameter}

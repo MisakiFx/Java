@@ -33,6 +33,12 @@
     <result column="class_name" jdbcType="VARCHAR" property="className"/>
     <result column="isteam" jdbcType="INTEGER" property="isTeam"/>
   </resultMap>
+  <select id="queryAthleteByStuNum" parameterType="bean.Athletes" resultMap="AthletesResult">
+    select id, stu_num, name, sex, college_id, class_name, isteam from athletes where stu_num = #{stuNum}
+ </select>
+ <select id="queryAthleteByName" parameterType="bean.Athletes" resultMap="AthletesResult">
+    select id, stu_num, name, sex, college_id, class_name, isteam from athletes where name = #{name}
+ </select>
  <select id="queryAthletesList" resultMap="AthletesResult">
     select id, stu_num, name, sex, college_id, class_name, isteam from athletes order by id
  </select>
@@ -48,6 +54,14 @@
   <delete id="deleteAthletesByName" parameterType="bean.Athletes">
  	delete from athletes where name = #{name}
  </delete>
+  
+ <update id="updateAthletesByStuNum" parameterType="bean.UpdateAthletes">
+ 	update athletes set stu_num = #{stuNum}, name = #{name}, sex = #{sex}, college_id = #{collegeId}, class_name = #{className} where stu_num = #{oldStu}
+</update>
+ <update id="updateAthletesByName" parameterType="bean.UpdateAthletes">
+ 	update athletes set stu_num = #{stuNum}, name = #{name}, sex = #{sex}, college_id = #{collegeId}, class_name = #{className} where name = #{oldStu}
+</update>
+
  <!--
 <delete id="deleteOne" parameterType="int">
  delete from book where id = #{_parameter}

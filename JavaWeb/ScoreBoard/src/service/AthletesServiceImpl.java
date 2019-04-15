@@ -100,6 +100,9 @@ public class AthletesServiceImpl implements AthletesService{
 		if(stuNum == null || "".equals(stuNum.trim())) {
 			return;
 		}
+		if(className == null || "".equals(className.trim())) {
+			return;
+		}
 		AthletesDao athletesDao = new AthletesDao();
 		athletesDao.insertAthletes(stuNum, name, sex, collegeId, className, 0);
 	}
@@ -140,5 +143,57 @@ public class AthletesServiceImpl implements AthletesService{
 		}
 		AthletesDao athletesDao = new AthletesDao();
 		athletesDao.deleteAthletesByName(name);
+	}
+	/**
+	 * 根据学号修改运动员信息
+	 * @param newStuNum 新学号
+	 * @param name 名字
+	 * @param sex 性别
+	 * @param collegeId 学院编号
+	 * @param className 班级名称
+	 * @param isTeam 团体/个人
+	 * @param oldStuNum 旧学号
+	 */
+	public void updateAthletesByStuNum(String StuNum, String name, String sex, int collegeId, String className, String oldStu) {
+		if(name == null || "".equals(name.trim())) {
+			return;
+		}
+		if(sex == null || "".equals(sex.trim())) {
+			return;
+		}
+		if(StuNum == null || "".equals(StuNum.trim())) {
+			return;
+		}
+		if(oldStu == null || "".equals(oldStu.trim())) {
+			return;
+		}
+		if(className == null || "".equals(className.trim())) {
+			return;
+		}
+		AthletesDao athletesDao = new AthletesDao();
+		athletesDao.updateAthletesByStuNum(StuNum, name, sex, collegeId, className,  oldStu);
+	}
+	/**
+	 * 根据名称修改团体信息
+	 * @param newStuNum 新学号
+	 * @param name 名字
+	 * @param sex 性别
+	 * @param collegeId 学院编号
+	 * @param className 班级名称
+	 * @param isTeam 团体/个人
+	 * @param oldStuNum 旧学号
+	 */
+	public void updateTeamsByName(String name, String sex, int collegeId, String oldStu) {
+		if(name == null || "".equals(name.trim())) {
+			return;
+		}
+		if(sex == null || "".equals(sex.trim())) {
+			return;
+		}
+		if(oldStu == null || "".equals(oldStu.trim())) {
+			return;
+		}
+		AthletesDao athletesDao = new AthletesDao();
+		athletesDao.updateAthletesByName("0", name, sex, collegeId, "NULL",  oldStu);
 	}
 }

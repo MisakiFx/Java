@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import bean.Athletes;
 import bean.College;
 import bean.Connect;
+import bean.MatchProject;
 import bean.MedalNum;
 import dao.AthletesDao;
 import dao.CollegeDao;
@@ -17,9 +18,12 @@ import dao.MatchProjectDao;
 import db.DBAccess;
 import service.AthletesServiceImpl;
 import service.CollegeServiceImpl;
+import service.ConnectServiceImpl;
+import service.MatchProjectServiceImpl;
 import viewobject.AthletesViw;
 import viewobject.AthletesViwForMatchProject;
 import viewobject.CollegePoint;
+import viewobject.MatchProjectViw;
 import viewobject.TeamViw;
 
 public class ScoreBoardTest {
@@ -63,11 +67,29 @@ public class ScoreBoardTest {
 //		for(TeamViw e : teamViw) {
 //			System.out.println(e.getName() + "\t" + e.getSex() + "\t" );
 //		}
-		AthletesServiceImpl athletesService = new AthletesServiceImpl();
-		List<AthletesViwForMatchProject> athletesViwForMatchProject = athletesService.queryAthletesListByMatchProject("男子400米");
-		for(AthletesViwForMatchProject e : athletesViwForMatchProject) {
-			System.out.println(e);
-		}
+//		AthletesServiceImpl athletesService = new AthletesServiceImpl();
+//		List<AthletesViwForMatchProject> athletesViwForMatchProject = athletesService.queryAthletesListByMatchProject("男子400米");
+//		for(AthletesViwForMatchProject e : athletesViwForMatchProject) {
+//			System.out.println(e);
+//		}
+//		AthletesServiceImpl athletesService = new AthletesServiceImpl();
+//		athletesService.updateAthletesByStuNum("201706060322", "刘志杰", "男", 1, "计算机173", "201706060334");
+//		athletesService.updateTeamsByName("计算机172", "男", 1, "计算机173");
+//		MatchProjectServiceImpl matchProjectServiceImpl = new MatchProjectServiceImpl();
+//		matchProjectServiceImpl.updateMatchProjectByName("男子4000米", 0, "2019-4-15 1:24:00", "男子400米");
+//		MatchProjectServiceImpl matchProjectServiceImpl = new MatchProjectServiceImpl();
+//		List<MatchProjectViw> matchProjectViw = matchProjectServiceImpl.queryTeamlMatchProjectList();
+//		for(MatchProjectViw e : matchProjectViw) {
+//			System.out.println(e.getName() + "\t" + e.getType() + "\t" + e.getTime() + "\t");
+//		}
+//		AthletesDao athletesDao = new AthletesDao();
+//		Athletes athlete = athletesDao.queryTeamByName("计算机172");
+//		System.out.println(athlete.getName() + "\t" + athlete.getId() + "\t" + athlete.getCollegeId());
+//		MatchProjectDao matchProjectDao = new MatchProjectDao();
+//		MatchProject matchproject = matchProjectDao.queryMatchProjectByName("男子4000米");
+//		System.out.println(matchproject.getName() + "\t" + matchproject.getId());
+//		ConnectServiceImpl connectServiceImpl = new ConnectServiceImpl();
+//		connectServiceImpl.insertConnect(0, "201706060322", "团体400米接力");
 	}
 }
 

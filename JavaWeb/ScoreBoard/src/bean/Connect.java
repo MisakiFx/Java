@@ -30,8 +30,8 @@ public class Connect {
 	public int getCollegeId() {
 		return collegeId;
 	}
-	public void setCollege_id(int college_id) {
-		this.collegeId = college_id;
+	public void setCollege_id(int collegeId) {
+		this.collegeId = collegeId;
 	}
 	public int getRank() {
 		return rank;

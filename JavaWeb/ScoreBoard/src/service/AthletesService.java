@@ -52,4 +52,26 @@ public interface AthletesService {
 	 * @param stuNum 学号
 	 */
 	public void deleteAthletesByName(String name);
+	/**
+	 * 根据学号修改运动员信息
+	 * @param newStuNum 新学号
+	 * @param name 名字
+	 * @param sex 性别
+	 * @param collegeId 学院编号
+	 * @param className 班级名称
+	 * @param isTeam 团体/个人
+	 * @param oldStuNum 旧学号
+	 */
+	public void updateAthletesByStuNum(String StuNum, String name, String sex, int collegeId, String className, String oldStu);
+	/**
+	 * 根据名称修改团体信息
+	 * @param newStuNum 新学号
+	 * @param name 名字
+	 * @param sex 性别
+	 * @param collegeId 学院编号
+	 * @param className 班级名称
+	 * @param isTeam 团体/个人
+	 * @param oldStuNum 旧学号
+	 */
+	public void updateTeamsByName(String name, String sex, int collegeId, String oldStu);
 }

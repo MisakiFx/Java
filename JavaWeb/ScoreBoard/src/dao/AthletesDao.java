@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import bean.Athletes;
 import bean.College;
 import bean.MatchProject;
+import bean.UpdateAthletes;
 import db.DBAccess;
 
 /**
@@ -38,6 +39,52 @@ public class AthletesDao {
 			}
 		}
 		return athletesList;
+	}
+	/**
+	 *  根据学号查找运动员
+	 * @return 返回运动员对象
+	 */
+	public Athletes queryAthleteByStuNum(String stuNum) {
+		DBAccess dbAccess = new DBAccess();
+		SqlSession sqlSession = null;
+		Athletes athlete = new Athletes();
+		athlete.setStuNum(stuNum);
+		try {
+			//sql通过自己的封装拿到数据库连接
+			sqlSession = dbAccess.getSqlSession();
+			athlete = sqlSession.selectOne("Athletes.queryAthleteByStuNum", athlete);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return athlete;
+	}
+	/**
+	 *  根据名称查找团体
+	 * @return 返回运动员（团体）对象
+	 */
+	public Athletes queryTeamByName(String name) {
+		DBAccess dbAccess = new DBAccess();
+		SqlSession sqlSession = null;
+		Athletes athlete = new Athletes();
+		athlete.setName(name);
+		try {
+			//sql通过自己的封装拿到数据库连接
+			sqlSession = dbAccess.getSqlSession();
+			athlete = sqlSession.selectOne("Athletes.queryAthleteByName", athlete);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return athlete;
 	}
 	/**
 	 * 根据比赛项目查找运动员
@@ -126,6 +173,72 @@ public class AthletesDao {
 				Athletes athletes = new Athletes();
 				athletes.setName(name);
 				sqlSession.delete("Athletes.deleteAthletesByName", athletes);
+				sqlSession.commit();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if(sqlSession != null) {
+					sqlSession.close();
+				}
+			}
+		}
+		/**
+		 * 根据学号修改运动员信息
+		 * @param newStuNum 新学号
+		 * @param name 名字
+		 * @param sex 性别
+		 * @param collegeId 学院编号
+		 * @param className 班级名称
+		 * @param isTeam 团体/个人
+		 * @param oldStuNum 旧学号
+		 */
+		public void updateAthletesByStuNum(String StuNum, String name, String sex, int collegeId, String className, String oldStu) {
+			DBAccess dbAccess = new DBAccess();
+			SqlSession sqlSession = null;
+			try {
+				sqlSession = dbAccess.getSqlSession();
+				UpdateAthletes updateAthletes = new UpdateAthletes();
+				updateAthletes.setStuNum(StuNum);
+				updateAthletes.setName(name);
+				updateAthletes.setSex(sex);
+				updateAthletes.setCollegeId(collegeId);
+				updateAthletes.setClassName(className);
+				updateAthletes.setOldStuNum(oldStu);
+				sqlSession.update("Athletes.updateAthletesByStuNum", updateAthletes);
+				sqlSession.commit();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if(sqlSession != null) {
+					sqlSession.close();
+				}
+			}
+		}
+		/**
+		 * 根据名称修改团体信息
+		 * @param newStuNum 新学号
+		 * @param name 名字
+		 * @param sex 性别
+		 * @param collegeId 学院编号
+		 * @param className 班级名称
+		 * @param isTeam 团体/个人
+		 * @param oldStuNum 旧学号
+		 */
+		public void updateAthletesByName(String StuNum, String name, String sex, int collegeId, String className, String oldStu) {
+			DBAccess dbAccess = new DBAccess();
+			SqlSession sqlSession = null;
+			try {
+				sqlSession = dbAccess.getSqlSession();
+				UpdateAthletes updateAthletes = new UpdateAthletes();
+				updateAthletes.setStuNum(StuNum);
+				updateAthletes.setName(name);
+				updateAthletes.setSex(sex);
+				updateAthletes.setCollegeId(collegeId);
+				updateAthletes.setClassName(className);
+				updateAthletes.setOldStuNum(oldStu);
+				sqlSession.update("Athletes.updateAthletesByName", updateAthletes);
 				sqlSession.commit();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
