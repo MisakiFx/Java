@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 
 import bean.Athletes;
 import bean.Connect;
+import bean.MatchProject;
 import bean.MedalNum;
+import bean.UpdateConnect;
 import db.DBAccess;
 
 /**
@@ -40,6 +42,7 @@ public class ConnectDao {
 	}
 	/**
 	 *  查询各学院金牌数量情况
+	 * @return 返回各学院奖牌数类
 	 */
 	public List<MedalNum> queryGoldNumList() {
 		//连接数据库操作对象
@@ -61,6 +64,7 @@ public class ConnectDao {
 	}
 	/**
 	 *  查询各学院银牌数量情况
+	 * @return 返回各学院奖牌数类
 	 */
 	public List<MedalNum> querySilverNumList() {
 		//连接数据库操作对象
@@ -82,6 +86,7 @@ public class ConnectDao {
 	}
 	/**
 	 *  查询各学院铜牌数量情况
+	 * @return 返回各学院奖牌数类
 	 */
 	public List<MedalNum> queryCopperNumList() {
 		//连接数据库操作对象
@@ -102,30 +107,90 @@ public class ConnectDao {
 		return connectList;
 	}
 	/**
-	 *  插入连接表比赛信息（哪个学院的运动员/团体参加了哪一场比赛）
-	 * @param message 个人/团体信息：个人则时学号，团体则是团体名称
-	 * @param type 类型，0个人，1团体
-	 * @param matchProject 比赛名称
+	 * 插入连接表比赛信息
+	 * @param athletesId 运动员编号
+	 * @param collegeId 学院编号
+	 * @param matchProjectId 比赛项目编号
 	 */
 	public void insertConnect(int athletesId, int collegeId, int matchProjectId) {
 		//连接数据库操作对象
-				DBAccess dbAccess = new DBAccess();
-				SqlSession sqlSession = null;
-				Connect connect = new Connect();
-				connect.setAthletesId(athletesId);
-				connect.setCollege_id(collegeId);
-				connect.setMatchProjectId(matchProjectId);
-				try {
-					sqlSession = dbAccess.getSqlSession();
-					sqlSession.insert("Connect.insertConnect", connect);
-					sqlSession.commit();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} finally {
-					if(sqlSession != null) {
-						sqlSession.close();
-					}
-				}
+		DBAccess dbAccess = new DBAccess();
+		SqlSession sqlSession = null;
+		Connect connect = new Connect();
+		connect.setAthletesId(athletesId);
+		connect.setCollegeId(collegeId);
+		connect.setMatchProjectId(matchProjectId);
+		try {
+			sqlSession = dbAccess.getSqlSession();
+			sqlSession.insert("Connect.insertConnect", connect);
+			sqlSession.commit();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+	}
+	/**
+	 * 修改连接表比赛信息
+	 * @param athletesId 运动员编号
+	 * @param collegeId 学院编号
+	 * @param matchProjectId 比赛项目编号
+	 * @param rank 名次
+	 * @param grade 成绩
+	 * @param oldAthletesId 原来的运动员编号
+	 * @param oldMatchProjectId 原来的比赛项目编号
+	 */
+	public void updateConnect(int athletesId, int collegeId, int matchProjectId, int rank, String grade, int oldAthletesId, int oldMatchProjectId) {
+		//连接数据库操作对象
+		DBAccess dbAccess = new DBAccess();
+		SqlSession sqlSession = null;
+		UpdateConnect connect = new UpdateConnect();
+		connect.setAthletesId(oldAthletesId);
+		connect.setCollegeId(collegeId);
+		connect.setMatchProjectId(matchProjectId);
+		connect.setRank(rank);
+		connect.setGrade(grade);
+		connect.setOldAthletesId(oldAthletesId);
+		connect.setOldMatchProjectId(oldMatchProjectId);
+		try {
+			sqlSession = dbAccess.getSqlSession();
+			sqlSession.update("Connect.updateConnect", connect);
+			sqlSession.commit();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+	}
+	/**
+	 * 查询比赛排名
+	 * @param matchProjectId 比赛项目编号
+	 * @return 连接表集合
+	 */
+	public List<Connect> queryRank(int matchProjectId) {
+		//连接数据库操作对象
+		DBAccess dbAccess = new DBAccess();
+		SqlSession sqlSession = null;
+		MatchProject matchProject = new MatchProject();
+		matchProject.setId(matchProjectId);
+		List<Connect> connectList = new ArrayList<Connect>();
+		try {
+			sqlSession = dbAccess.getSqlSession();
+			connectList  = sqlSession.selectList("Connect.queryRank", matchProject);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return connectList;
 	}
 }

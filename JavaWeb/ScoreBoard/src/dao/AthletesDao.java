@@ -62,6 +62,28 @@ public class AthletesDao {
 			}
 		}
 		return athlete;
+	}/**
+	 *  根据学号查找运动员
+	 * @return 返回运动员对象
+	 */
+	public Athletes queryAthleteById(int id) {
+		DBAccess dbAccess = new DBAccess();
+		SqlSession sqlSession = null;
+		Athletes athlete = new Athletes();
+		athlete.setId(id);
+		try {
+			//sql通过自己的封装拿到数据库连接
+			sqlSession = dbAccess.getSqlSession();
+			athlete = sqlSession.selectOne("Athletes.queryAthleteById", athlete);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return athlete;
 	}
 	/**
 	 *  根据名称查找团体

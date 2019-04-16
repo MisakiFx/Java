@@ -24,6 +24,7 @@ import viewobject.AthletesViw;
 import viewobject.AthletesViwForMatchProject;
 import viewobject.CollegePoint;
 import viewobject.MatchProjectViw;
+import viewobject.MatchRank;
 import viewobject.TeamViw;
 
 public class ScoreBoardTest {
@@ -90,6 +91,13 @@ public class ScoreBoardTest {
 //		System.out.println(matchproject.getName() + "\t" + matchproject.getId());
 //		ConnectServiceImpl connectServiceImpl = new ConnectServiceImpl();
 //		connectServiceImpl.insertConnect(0, "201706060322", "团体400米接力");
+		ConnectServiceImpl connectServiceImpl = new ConnectServiceImpl();
+		AthletesServiceImpl athletesServiceImpl = new AthletesServiceImpl();
+		athletesServiceImpl.updateAthletesByStuNum("201706060325", "庞金龙", "男", 1, "电气182", "201706060325");
+		List<MatchRank> matchRank = connectServiceImpl.queryRank("男子4000米");
+		for(MatchRank e : matchRank) {
+			System.out.println(e.getName() + "\t" + e.getClassName() + "\t" + e.getRank() + "\t" + e.getGrade());
+		}
 	}
 }
 

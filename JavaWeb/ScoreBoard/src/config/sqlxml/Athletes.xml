@@ -45,6 +45,9 @@
  <select id="queryAthletesListByMatchProject" parameterType="bean.MatchProject" resultMap="AthletesResult">
     select id, stu_num, name, sex, college_id, class_name, isteam from athletes where id in (select athletes_id from connect where match_project_id = (select id from match_project where name = #{name})) order by id;
  </select>
+ <select id="queryAthleteById" parameterType="bean.Athletes" resultMap="AthletesResult">
+    select id, stu_num, name, sex, college_id, class_name, isteam from athletes where id = #{id}
+ </select>
  <insert id="insertAthletes" parameterType="bean.Athletes">
     insert into athletes(stu_num, name, sex, college_id, class_name, isteam) values(#{stuNum},#{name},#{sex},#{collegeId},#{className},#{isTeam})
  </insert>

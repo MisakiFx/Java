@@ -1,6 +1,6 @@
 package bean;
 /**
- * 记录各学院奖牌数
+ * 记录各学院奖牌数类
  * @author Misaki
  *
  */

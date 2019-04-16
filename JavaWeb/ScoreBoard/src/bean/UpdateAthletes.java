@@ -1,5 +1,9 @@
 package bean;
-
+/**
+ * 修改运动员所用到的类
+ * @author Misaki
+ *
+ */
 public class UpdateAthletes {
 	/*运动员编号*/
 	private int id;
