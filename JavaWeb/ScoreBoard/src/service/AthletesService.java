@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+import error.BusinessException;
 import viewobject.AthletesViw;
 import viewobject.AthletesViwForMatchProject;
 import viewobject.TeamViw;
@@ -14,19 +15,22 @@ public interface AthletesService {
 	/**
 	 * 根据学院查看运动员信息
 	 * @return 运动员视图表
+	 * @throws BusinessException 
 	 */
-	public List<AthletesViw> getAthletesByCollege(int college);
+	public List<AthletesViw> getAthletesByCollege(int college) throws BusinessException;
 	/**
 	 * 根据比赛项目查找运动员
 	 * @param matchName 比赛项目
 	 * @return 运动员视图表
+	 * @throws BusinessException 
 	 */
-	public List<AthletesViwForMatchProject> queryAthletesListByMatchProject(String matchName);
+	public List<AthletesViwForMatchProject> queryAthletesListByMatchProject(String matchName) throws BusinessException;
 	/**
 	 * 根据学院查看团体信息
 	 * @return
+	 * @throws BusinessException 
 	 */
-	public List<TeamViw> getTeamByCollege(int college);
+	public List<TeamViw> getTeamByCollege(int college) throws BusinessException;
 	/**
 	 * 添加运动员
 	 * @param stuNum 学号

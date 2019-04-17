@@ -38,6 +38,9 @@ public class AthletesDao {
 				sqlSession.close();
 			}
 		}
+		if(athletesList.isEmpty()) {
+			return null;
+		}
 		return athletesList;
 	}
 	/**
@@ -61,6 +64,9 @@ public class AthletesDao {
 				sqlSession.close();
 			}
 		}
+		if(athlete == null | athlete.getId() == 0) {
+			return null;
+		}
 		return athlete;
 	}/**
 	 *  根据学号查找运动员
@@ -69,7 +75,7 @@ public class AthletesDao {
 	public Athletes queryAthleteById(int id) {
 		DBAccess dbAccess = new DBAccess();
 		SqlSession sqlSession = null;
-		Athletes athlete = new Athletes();
+		Athletes athlete = null;
 		athlete.setId(id);
 		try {
 			//sql通过自己的封装拿到数据库连接
@@ -83,6 +89,9 @@ public class AthletesDao {
 				sqlSession.close();
 			}
 		}
+		if(athlete == null | athlete.getId() == 0) {
+			return null;
+		}
 		return athlete;
 	}
 	/**
@@ -92,7 +101,7 @@ public class AthletesDao {
 	public Athletes queryTeamByName(String name) {
 		DBAccess dbAccess = new DBAccess();
 		SqlSession sqlSession = null;
-		Athletes athlete = new Athletes();
+		Athletes athlete = null;
 		athlete.setName(name);
 		try {
 			//sql通过自己的封装拿到数据库连接
@@ -105,6 +114,9 @@ public class AthletesDao {
 			if(sqlSession != null) {
 				sqlSession.close();
 			}
+		}
+		if(athlete == null | athlete.getId() == 0) {
+			return null;
 		}
 		return athlete;
 	}
@@ -130,6 +142,9 @@ public class AthletesDao {
 			if(sqlSession != null) {
 				sqlSession.close();
 			}
+		}
+		if(athletesList.isEmpty()) {
+			return null;
 		}
 		return athletesList;
 	}

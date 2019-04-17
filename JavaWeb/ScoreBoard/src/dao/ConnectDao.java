@@ -38,6 +38,9 @@ public class ConnectDao {
 				sqlSession.close();
 			}
 		}
+		if(connectList.isEmpty()) {
+			return null;
+		}
 		return connectList;
 	}
 	/**
@@ -59,6 +62,9 @@ public class ConnectDao {
 			if(sqlSession != null) {
 				sqlSession.close();
 			}
+		}
+		if(connectList.isEmpty()) {
+			return null;
 		}
 		return connectList;
 	}
@@ -82,6 +88,9 @@ public class ConnectDao {
 				sqlSession.close();
 			}
 		}
+		if(connectList.isEmpty()) {
+			return null;
+		}
 		return connectList;
 	}
 	/**
@@ -103,6 +112,9 @@ public class ConnectDao {
 			if(sqlSession != null) {
 				sqlSession.close();
 			}
+		}
+		if(connectList.isEmpty()) {
+			return null;
 		}
 		return connectList;
 	}
@@ -190,6 +202,9 @@ public class ConnectDao {
 			if(sqlSession != null) {
 				sqlSession.close();
 			}
+		}
+		if(connectList.isEmpty()) {
+			return null;
 		}
 		return connectList;
 	}

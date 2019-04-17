@@ -51,6 +51,7 @@
     <mapper resource="config/sqlxml/Connect.xml"/>
     <mapper resource="config/sqlxml/Athletes.xml"/>
     <mapper resource="config/sqlxml/MatchProject.xml"/>
+    <mapper resource="config/sqlxml/User.xml"/>
   </mappers>
 
 </configuration>

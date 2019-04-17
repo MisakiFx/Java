@@ -7,13 +7,13 @@ package viewobject;
 public class AthletesViw {
 	/*运动员编号*/
 	private int id;
-	/*学号*/
+	/*学号如果是团体，是0*/
 	private String stuNum;
 	/*运动员姓名*/
 	private String name;
 	/*性别*/
 	private String sex;
-	/*班级*/
+	/*班级如果是团体是"NULL" */
 	private String className;
 	public int getId() {
 		return id;

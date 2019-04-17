@@ -5,6 +5,8 @@ import java.util.List;
 
 import bean.MatchProject;
 import dao.MatchProjectDao;
+import error.BusinessException;
+import error.EmBusinessError;
 import viewobject.MatchProjectViw;
 /**
  * 比赛项目相关操作接口
@@ -62,10 +64,14 @@ public class MatchProjectServiceImpl implements MatchProjectService {
 		/**
 		 * 查询所有比赛项目
 		 * @return 比赛项目集合(名称，类型，时间)
+		 * @throws BusinessException 
 		 */
-		public List<MatchProjectViw> queryMatchProjectList() {
+		public List<MatchProjectViw> queryMatchProjectList() throws BusinessException {
 			MatchProjectDao matchProjectDao = new MatchProjectDao();
 			List<MatchProject> matchProject = matchProjectDao.queryMatchProjectList();
+			if(matchProject.isEmpty()) {
+				throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
+			}
 			List<MatchProjectViw> matchProjectViwList = new ArrayList<MatchProjectViw>();
 			for(int i = 0; i < matchProject.size(); i++) {
 				MatchProjectViw matchProjectViw = new MatchProjectViw();
@@ -78,15 +84,22 @@ public class MatchProjectServiceImpl implements MatchProjectService {
 				matchProjectViw.setTime(matchProject.get(i).getTime());
 				matchProjectViwList.add(matchProjectViw);
 			}
+			if(matchProjectViwList.isEmpty()) {
+				return null;
+			}
 			return matchProjectViwList;
 		}
 		/**
 		 * 查询所有个人比赛项目
 		 * @return 比赛项目集合(名称，类型，时间)
+		 * @throws BusinessException 
 		 */
-		public List<MatchProjectViw> queryIndividualMatchProjectList() {
+		public List<MatchProjectViw> queryIndividualMatchProjectList() throws BusinessException {
 			MatchProjectDao matchProjectDao = new MatchProjectDao();
 			List<MatchProject> matchProject = matchProjectDao.queryMatchProjectList();
+			if(matchProject == null) {
+				throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
+			}
 			List<MatchProjectViw> matchProjectViwList = new ArrayList<MatchProjectViw>();
 			for(int i = 0; i < matchProject.size(); i++) {
 				if(matchProject.get(i).getType() == 0) {
@@ -97,15 +110,22 @@ public class MatchProjectServiceImpl implements MatchProjectService {
 					matchProjectViwList.add(matchProjectViw);
 				}
 			}
+			if(matchProjectViwList.isEmpty()) {
+				return null;
+			}
 			return matchProjectViwList;
 		}
 		/**
 		 * 查询所有团体比赛项目
 		 * @return 比赛项目集合(名称，类型，时间)
+		 * @throws BusinessException 
 		 */
-		public List<MatchProjectViw> queryTeamlMatchProjectList() {
+		public List<MatchProjectViw> queryTeamlMatchProjectList() throws BusinessException {
 			MatchProjectDao matchProjectDao = new MatchProjectDao();
 			List<MatchProject> matchProject = matchProjectDao.queryMatchProjectList();
+			if(matchProject == null) {
+				throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
+			}
 			List<MatchProjectViw> matchProjectViwList = new ArrayList<MatchProjectViw>();
 			for(int i = 0; i < matchProject.size(); i++) {
 				if(matchProject.get(i).getType() == 1) {
@@ -115,6 +135,9 @@ public class MatchProjectServiceImpl implements MatchProjectService {
 					matchProjectViw.setTime(matchProject.get(i).getTime());
 					matchProjectViwList.add(matchProjectViw);
 				}
+			}
+			if(matchProjectViwList.isEmpty()) {
+				return null;
 			}
 			return matchProjectViwList;
 		}

@@ -113,6 +113,9 @@ public class MatchProjectDao {
 				sqlSession.close();
 			}
 		}
+		if(matchProject.isEmpty()) {
+			return null;
+		}
 		return matchProject;
 	}
 	/**
@@ -123,7 +126,7 @@ public class MatchProjectDao {
 	public MatchProject queryMatchProjectByName(String name) {
 		DBAccess dbAccess = new DBAccess();
 		SqlSession sqlSession = null;
-		MatchProject matchProject = new MatchProject();
+		MatchProject matchProject = null;
 		matchProject.setName(name);
 		try {
 			sqlSession = dbAccess.getSqlSession();
@@ -135,6 +138,9 @@ public class MatchProjectDao {
 			if(sqlSession != null) {
 				sqlSession.close();
 			}
+		} 
+		if(matchProject == null | matchProject.getId() == 0) {
+			return null;
 		}
 		return matchProject;
 	}

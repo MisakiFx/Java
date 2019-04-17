@@ -1,5 +1,10 @@
 package service;
 
+import java.util.List;
+
+import error.BusinessException;
+import viewobject.MatchRank;
+
 public interface ConnectService {
 	/**
 	 * 插入连接表信息（运动员id, 学院id, 比赛项目id）
@@ -28,4 +33,11 @@ public interface ConnectService {
 	 * @param grade 成绩
 	 */
 	public void insertGrade(int type, String message, String matchProjectName, int rank, String grade);
+	/**
+	 * 查询比赛排名
+	 * @param matchProjectId 比赛项目编号
+	 * @return 连接表集合
+	 * @throws BusinessException 
+	 */
+	public List<MatchRank> queryRank(String matchProjectName) throws BusinessException;
 }

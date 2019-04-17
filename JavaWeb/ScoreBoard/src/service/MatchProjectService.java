@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+import error.BusinessException;
 import viewobject.MatchProjectViw;
 
 /**
@@ -33,16 +34,19 @@ public interface MatchProjectService {
 	/**
 	 * 查询所有比赛项目
 	 * @return 比赛项目集合(名称，类型，时间)
+	 * @throws BusinessException 
 	 */
-	public List<MatchProjectViw> queryMatchProjectList();
+	public List<MatchProjectViw> queryMatchProjectList() throws BusinessException;
 	/**
 	 * 查询所有个人比赛项目
 	 * @return 比赛项目集合(名称，类型，时间)
+	 * @throws BusinessException 
 	 */
-	public List<MatchProjectViw> queryIndividualMatchProjectList();
+	public List<MatchProjectViw> queryIndividualMatchProjectList() throws BusinessException;
 	/**
 	 * 查询所有团体比赛项目
 	 * @return 比赛项目集合(名称，类型，时间)
+	 * @throws BusinessException 
 	 */
-	public List<MatchProjectViw> queryTeamlMatchProjectList();
+	public List<MatchProjectViw> queryTeamlMatchProjectList() throws BusinessException;
 }

@@ -9,6 +9,8 @@ import bean.MatchProject;
 import dao.AthletesDao;
 import dao.ConnectDao;
 import dao.MatchProjectDao;
+import error.BusinessException;
+import error.EmBusinessError;
 import viewobject.MatchRank;
 
 /**
@@ -128,8 +130,9 @@ public class ConnectServiceImpl implements ConnectService{
 	 * 查询比赛排名
 	 * @param matchProjectId 比赛项目编号
 	 * @return 连接表集合
+	 * @throws BusinessException 
 	 */
-	public List<MatchRank> queryRank(String matchProjectName) {
+	public List<MatchRank> queryRank(String matchProjectName) throws BusinessException {
 		if(matchProjectName == null || "".equals(matchProjectName.trim())) {
 			return null;
 		}
@@ -144,6 +147,9 @@ public class ConnectServiceImpl implements ConnectService{
 		List<Athletes> athletesList = new ArrayList<Athletes>();
 		athletesList = athletesDao.queryAthletesList();
 		connect = connectDao.queryRank(matchProject.getId());
+		if(matchProject == null || connect.isEmpty() || athletesList.isEmpty()) {
+			throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
+		}
 		List<MatchRank> matchRankList = new ArrayList<MatchRank>();
 		for(Connect connecttemp : connect) {
 			MatchRank matchRank = new MatchRank();
@@ -159,6 +165,9 @@ public class ConnectServiceImpl implements ConnectService{
 			matchRank.setGrade(connecttemp.getGrade());
 			matchRankList.add(matchRank);
 			}
+		if(matchRankList.isEmpty()) {
+			return null;
+		}
 		return matchRankList;
 	}
 }

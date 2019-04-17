@@ -8,6 +8,8 @@ import bean.College;
 import dao.AthletesDao;
 import dao.CollegeDao;
 import dao.MatchProjectDao;
+import error.BusinessException;
+import error.EmBusinessError;
 import viewobject.AthletesViw;
 import viewobject.AthletesViwForMatchProject;
 import viewobject.TeamViw;
@@ -21,10 +23,14 @@ public class AthletesServiceImpl implements AthletesService{
 	/**
 	 * 根据学院查看运动员信息
 	 * @return 运动员视图表
+	 * @throws BusinessException 
 	 */
-	public List<AthletesViw> getAthletesByCollege(int college) {
+	public List<AthletesViw> getAthletesByCollege(int college) throws BusinessException {
 		AthletesDao athletesDao = new AthletesDao();
 		List<Athletes> athletes = athletesDao.queryAthletesList();
+		if (athletes == null) {
+			throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
+		}
 		List<AthletesViw> athletesViw = new ArrayList<AthletesViw>();
 		for(Athletes athlete : athletes) {
 			if(athlete.getCollegeId() == college && athlete.getIsTeam() == 0) {
@@ -37,19 +43,26 @@ public class AthletesServiceImpl implements AthletesService{
 				athletesViw.add(athleteViw);
 			}
 		}
+		if(athletesViw.isEmpty()) {
+			return null;
+		}
 		return athletesViw;
 	}
 	/**
 	 * 根据比赛项目查找运动员
 	 * @param matchName 比赛项目
 	 * @return 运动员视图表
+	 * @throws BusinessException 
 	 */
-	public List<AthletesViwForMatchProject> queryAthletesListByMatchProject(String matchName) {
+	public List<AthletesViwForMatchProject> queryAthletesListByMatchProject(String matchName) throws BusinessException {
 		AthletesDao athletesDao = new AthletesDao();
 		CollegeDao collegeDao = new CollegeDao();
 		//拿到对应比赛的所有运动员信息表
 		List<Athletes> athletes = athletesDao.queryAthletesListByMatchProject(matchName);
 		List<College> colleges = collegeDao.queryCollegeList();
+		if(athletes == null || colleges == null) {
+			throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
+		}
 		List<AthletesViwForMatchProject> athletesViwForMatchProject = new ArrayList<AthletesViwForMatchProject>();
 		//信息录入运动员视图表
 		for(Athletes athlete : athletes) {
@@ -62,15 +75,22 @@ public class AthletesServiceImpl implements AthletesService{
 			athleteViwForMatchProject.setCollege(colleges.get(athlete.getCollegeId() - 1).getName());
 			athletesViwForMatchProject.add(athleteViwForMatchProject);
 		}
+		if(athletesViwForMatchProject.isEmpty()) {
+			return null;
+		}
 		return athletesViwForMatchProject;
 	}
 	/**
 	 * 根据学院查看团体信息
 	 * @return
+	 * @throws BusinessException 
 	 */
-	public List<TeamViw> getTeamByCollege(int college) {
+	public List<TeamViw> getTeamByCollege(int college) throws BusinessException {
 		AthletesDao athletesDao = new AthletesDao();
 		List<Athletes> athletes = athletesDao.queryAthletesList();
+		if(athletes == null) {
+			throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
+		}
 		List<TeamViw> teamViw = new ArrayList<TeamViw>();
 		for(Athletes team : athletes) {
 			if(team.getCollegeId() == college && team.getIsTeam() == 1) {
@@ -80,6 +100,9 @@ public class AthletesServiceImpl implements AthletesService{
 				teamViwt.setSex(team.getSex());
 				teamViw.add(teamViwt);
 			}
+		}
+		if(teamViw.isEmpty()) {
+			return null;
 		}
 		return teamViw;
 	}

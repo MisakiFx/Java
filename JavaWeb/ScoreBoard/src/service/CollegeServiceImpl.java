@@ -8,6 +8,8 @@ import bean.MedalNum;
 import dao.CollegeDao;
 import dao.ConnectDao;
 import dao.MatchProjectDao;
+import error.BusinessException;
+import error.EmBusinessError;
 
 /**
  * 学院相关操作外部接口
@@ -21,16 +23,23 @@ public class CollegeServiceImpl implements CollegeService{
 	/**
 	 * 查询所有学院得分情况及奖牌数量
 	 * @return 返回所有学院得分情况数组
+	 * @throws BusinessException 
 	 */
-	public CollegePoint[] getAllCollegePoint() {
+	public CollegePoint[] getAllCollegePoint() throws BusinessException {
 		//创建十三个学院的分数类数组
 		CollegePoint[] collegePoint = new CollegePoint[COLLEGECOUNT];
 		//查出成绩表
 		ConnectDao connectDao = new ConnectDao();
 		List<Connect> connectList = connectDao.queryConnectList();
+		if (connectList == null) {
+			throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
+		}
 		//查出学院表
 		CollegeDao collegeDao = new CollegeDao();
 		List<College> collegeList = collegeDao.queryCollegeList();
+		if (connectList == null) {
+			throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
+		}
 		//建立分数信息数组
 		int numOfGold[] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
 		int numOfSilver[] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -60,16 +69,23 @@ public class CollegeServiceImpl implements CollegeService{
 			collegePoint[i].setCopper(numOfCopper[i]);
 			collegePoint[i].setTotal();
 		}
+		if(collegePoint.length == 0) {
+			return null;
+		}
 		return collegePoint;
 	}
 	/**
 	 * 
 	 * @param college 学院名称
 	 * @return 某个学院的得分及奖牌数
+	 * @throws BusinessException 
 	 */
-	public CollegePoint getCollegePoint(String college) {
+	public CollegePoint getCollegePoint(String college) throws BusinessException {
 		CollegeServiceImpl collegeService = new CollegeServiceImpl();
 		CollegePoint[] collegePoint = collegeService.getAllCollegePoint();
+		if(collegePoint.length == 0) {
+			throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
+		}
 		int i = 0;
 		for(; i < COLLEGECOUNT; i++) {
 			if(collegePoint[i].getCollegeName().equals(college) == true) {
@@ -81,8 +97,9 @@ public class CollegeServiceImpl implements CollegeService{
 	/**
 	 * 查询所有学院得分情况及奖牌数量
 	 * @return 返回所有学院得分情况数组
+	 * @throws BusinessException 
 	 */
-	public CollegePoint[] getAllCollegePoint2() {
+	public CollegePoint[] getAllCollegePoint2() throws BusinessException {
 		//创建十三个学院的分数类数组
 		CollegePoint[] collegePoint = new CollegePoint[COLLEGECOUNT];
 		ConnectDao connectDao = new ConnectDao();
@@ -90,9 +107,15 @@ public class CollegeServiceImpl implements CollegeService{
 		List<MedalNum> goldNumList = connectDao.queryGoldNumList();
 		List<MedalNum> silverNumList = connectDao.querySilverNumList();
 		List<MedalNum> copperNumList = connectDao.queryCopperNumList();
+		if (goldNumList == null || silverNumList == null || copperNumList == null) {
+			throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
+		}
 		//查出学院表
 		CollegeDao collegeDao = new CollegeDao();
 		List<College> collegeList = collegeDao.queryCollegeList();
+		if (collegeList == null) {
+			throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
+		}
 		//建立分数信息数组
 		int numOfGold[] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
 		int numOfSilver[] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -117,16 +140,23 @@ public class CollegeServiceImpl implements CollegeService{
 			collegePoint[i].setCopper(numOfCopper[i]);
 			collegePoint[i].setTotal();
 		}
+		if(collegePoint.length == 0) {
+			return null;
+		}
 		return collegePoint;
 	}
 	/**
 	 * 
 	 * @param college 学院名称
 	 * @return 某个学院的得分及奖牌数
+	 * @throws BusinessException 
 	 */
-	public CollegePoint getCollegePoint2(String college) {
+	public CollegePoint getCollegePoint2(String college) throws BusinessException {
 		CollegeServiceImpl collegeService = new CollegeServiceImpl();
 		CollegePoint[] collegePoint = collegeService.getAllCollegePoint();
+		if(collegePoint.length == 0) {
+			throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
+		}
 		int i = 0;
 		for(; i < COLLEGECOUNT; i++) {
 			if(collegePoint[i].getCollegeName().equals(college) == true) {

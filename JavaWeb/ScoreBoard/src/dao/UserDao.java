@@ -6,23 +6,27 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import bean.College;
+import bean.MatchProject;
+import bean.User;
 import db.DBAccess;
 
 /**
- * 学院表数据库操作
+ * 用户表操作
  * @author Misaki
  *
  */
-public class CollegeDao {
-	public List<College> queryCollegeList() {
+public class UserDao {
+	/**
+	 * 查询管理员用户表
+	 * @return 返回管理员用户表
+	 */
+	public List<User> queryUserList() {
 		DBAccess dbAccess = new DBAccess();
 		SqlSession sqlSession = null;
-		List<College> collegeList = new ArrayList<College>();
+		List<User> userList = new ArrayList<User>();
 		try {
-			//sql通过自己的封装拿到数据库连接
 			sqlSession = dbAccess.getSqlSession();
-			collegeList = sqlSession.selectList("College.queryCollegeList");
+			userList = sqlSession.selectList("User.queryUserList");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,9 +35,11 @@ public class CollegeDao {
 				sqlSession.close();
 			}
 		}
-		if(collegeList.isEmpty()) {
+		if(userList.isEmpty()) {
 			return null;
 		}
-		return collegeList;
+		return userList;
 	}
+
+
 }
