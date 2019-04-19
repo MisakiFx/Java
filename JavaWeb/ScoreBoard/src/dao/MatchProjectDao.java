@@ -126,7 +126,7 @@ public class MatchProjectDao {
 	public MatchProject queryMatchProjectByName(String name) {
 		DBAccess dbAccess = new DBAccess();
 		SqlSession sqlSession = null;
-		MatchProject matchProject = null;
+		MatchProject matchProject = new MatchProject();
 		matchProject.setName(name);
 		try {
 			sqlSession = dbAccess.getSqlSession();

@@ -19,7 +19,7 @@ import error.EmBusinessError;
 
 import viewobject.CollegePoint;
 public class CollegeServiceImpl implements CollegeService{
-	private final int COLLEGECOUNT = 13;
+	private final int COLLEGECOUNT = 14;
 	/**
 	 * 查询所有学院得分情况及奖牌数量
 	 * @return 返回所有学院得分情况数组
@@ -41,9 +41,9 @@ public class CollegeServiceImpl implements CollegeService{
 			throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
 		}
 		//建立分数信息数组
-		int numOfGold[] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
-		int numOfSilver[] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
-		int numOfCopper[] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+		int numOfGold[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+		int numOfSilver[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+		int numOfCopper[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 		//遍历统计各学院
 		for(Connect connect : connectList) {
 			if(connect.getRank() == 1)

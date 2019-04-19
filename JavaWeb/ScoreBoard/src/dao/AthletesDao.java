@@ -75,7 +75,7 @@ public class AthletesDao {
 	public Athletes queryAthleteById(int id) {
 		DBAccess dbAccess = new DBAccess();
 		SqlSession sqlSession = null;
-		Athletes athlete = null;
+		Athletes athlete = new Athletes();
 		athlete.setId(id);
 		try {
 			//sql通过自己的封装拿到数据库连接

@@ -123,9 +123,6 @@ public class AthletesServiceImpl implements AthletesService{
 		if(stuNum == null || "".equals(stuNum.trim())) {
 			return;
 		}
-		if(className == null || "".equals(className.trim())) {
-			return;
-		}
 		AthletesDao athletesDao = new AthletesDao();
 		athletesDao.insertAthletes(stuNum, name, sex, collegeId, className, 0);
 	}
@@ -143,7 +140,7 @@ public class AthletesServiceImpl implements AthletesService{
 			return;
 		}
 		AthletesDao athletesDao = new AthletesDao();
-		athletesDao.insertAthletes("0", name, sex, collegeId, "NULL", 0);
+		athletesDao.insertAthletes("0", name, sex, collegeId, "NULL", 1);
 	}
 	/**
 	 * 根据学号删除运动员
@@ -188,9 +185,6 @@ public class AthletesServiceImpl implements AthletesService{
 			return;
 		}
 		if(oldStu == null || "".equals(oldStu.trim())) {
-			return;
-		}
-		if(className == null || "".equals(className.trim())) {
 			return;
 		}
 		AthletesDao athletesDao = new AthletesDao();
