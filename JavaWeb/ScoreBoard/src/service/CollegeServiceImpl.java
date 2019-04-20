@@ -46,15 +46,15 @@ public class CollegeServiceImpl implements CollegeService{
 		int numOfCopper[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 		//遍历统计各学院
 		for(Connect connect : connectList) {
-			if(connect.getRank() == 1)
+			if(connect != null && connect.getRank() == 1)
 			{
 				numOfGold[connect.getCollegeId() - 1] += 1;
 			}
-			else if(connect.getRank() == 2)
+			else if(connect != null && connect.getRank() == 2)
 			{
 				numOfSilver[connect.getCollegeId() - 1] += 1;
 			}
-			else if(connect.getRank() == 3)
+			else if(connect != null && connect.getRank() == 3)
 			{
 				numOfCopper[connect.getCollegeId() - 1] += 1;
 			}
@@ -100,16 +100,13 @@ public class CollegeServiceImpl implements CollegeService{
 	 * @throws BusinessException 
 	 */
 	public CollegePoint[] getAllCollegePoint2() throws BusinessException {
-		//创建十三个学院的分数类数组
+		//创建十四个学院的分数类数组
 		CollegePoint[] collegePoint = new CollegePoint[COLLEGECOUNT];
 		ConnectDao connectDao = new ConnectDao();
 		//拿到各学院金银铜牌总数表
 		List<MedalNum> goldNumList = connectDao.queryGoldNumList();
 		List<MedalNum> silverNumList = connectDao.querySilverNumList();
 		List<MedalNum> copperNumList = connectDao.queryCopperNumList();
-		if (goldNumList == null || silverNumList == null || copperNumList == null) {
-			throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
-		}
 		//查出学院表
 		CollegeDao collegeDao = new CollegeDao();
 		List<College> collegeList = collegeDao.queryCollegeList();
@@ -117,18 +114,24 @@ public class CollegeServiceImpl implements CollegeService{
 			throw new BusinessException(EmBusinessError.UNKNOWN_ERROR,"未找到相关信息");
 		}
 		//建立分数信息数组
-		int numOfGold[] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
-		int numOfSilver[] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
-		int numOfCopper[] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+		int numOfGold[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+		int numOfSilver[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+		int numOfCopper[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 		//将金银铜表表导入分数信息数组
-		for(MedalNum num : goldNumList) {
-			numOfGold[num.getCollegeId() - 1] = num.getNum();
+		if(goldNumList != null) {
+			for(MedalNum num : goldNumList) {
+				numOfGold[num.getCollegeId() - 1] = num.getNum();
+			}
 		}
-		for(MedalNum num : silverNumList) {
-			numOfSilver[num.getCollegeId() - 1] = num.getNum();
+		if(silverNumList != null) {
+			for(MedalNum num : silverNumList) {
+				numOfSilver[num.getCollegeId() - 1] = num.getNum();
+			}
 		}
-		for(MedalNum num : copperNumList) {
-			numOfCopper[num.getCollegeId() - 1] = num.getNum();
+		if(copperNumList != null) {
+			for(MedalNum num : copperNumList) {
+				numOfCopper[num.getCollegeId() - 1] = num.getNum();
+			}
 		}
 		//向分数类数组的每一个对象赋值
 		for(int i = 0; i < COLLEGECOUNT; i++) {
