@@ -28,7 +28,7 @@ public class JSwing extends JFrame
         c.add(bt);
         bt.setBounds(100, 100, 100, 100);
         c.add(text);
-        text.setBounds(40, 400, 200, 50);
+        text.setBounds(40, 400, 200, 20);
         //setResizable(false);
     }
     public static void main(String[] args) {
