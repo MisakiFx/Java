@@ -19,10 +19,6 @@ public class FileTest {
         FileWriter writer = null;
         try {
             reader = new FileReader(file);
-            //File outFile = new File("Func.txt");
-            //if (!outFile.exists()) {
-            //    outFile.createNewFile();
-            //}
             writer = new FileWriter("Func.txt");
             int temp;
             while ((temp = reader.read()) != -1) {
